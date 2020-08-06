@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/20 16:58:42 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/11/02 17:49:02 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t size;
+	size_t i;
+	size_t j;
 
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+	i = 0;
+	size = 0;
+	while (dst[i])
+		i++;
+	while (src[size])
+		size++;
+	if (dstsize > i)
+		size += i;
+	else
+		size += dstsize;
+	j = 0;
+	dst[i] = src[j];
+	while (src[j] && i + 1 < dstsize)
+	{
+		i++;
+		j++;
+		dst[i] = src[j];
+	}
+	dst[i] = '\0';
+	return (size);
+}

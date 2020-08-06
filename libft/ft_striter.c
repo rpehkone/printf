@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/19 13:20:05 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/11/07 16:48:21 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
-
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+void	ft_striter(char *s, void (*f)(char *))
+{
+	if (s && f)
+		while (*s)
+		{
+			f(s);
+			s++;
+		}
+}

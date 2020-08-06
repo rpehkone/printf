@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/20 17:52:42 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/10/24 14:20:44 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	char *p;
 
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+	p = NULL;
+	while (*s)
+	{
+		if (*s == c)
+			p = (char*)s;
+		s++;
+	}
+	if (!c)
+		p = (char*)s;
+	return (p);
+}

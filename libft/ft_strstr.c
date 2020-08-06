@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/18 20:26:00 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/10/24 14:53:06 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	int		i;
+	int		j;
 
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+	if (!(*needle))
+		return ((char*)haystack);
+	while (*haystack)
+	{
+		if (*haystack == needle[0])
+		{
+			i = 0;
+			j = 0;
+			while (haystack[i++] == needle[j++])
+				if (!(needle[j]))
+					return ((char*)haystack);
+		}
+		haystack++;
+	}
+	return (NULL);
+}

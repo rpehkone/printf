@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/28 18:23:58 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/10/31 12:35:27 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
-
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+{
+	if (lst)
+	{
+		f(lst);
+		if (lst->next)
+			ft_lstiter(lst->next, f);
+	}
+}

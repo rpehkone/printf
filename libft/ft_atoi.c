@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/20 18:26:19 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/10/23 18:54:35 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+int		ft_atoi(const char *str)
+{
+	int		neg;
+	int		res;
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
-
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+	res = 0;
+	neg = 1;
+	while (*str && ((*str > 7 && *str < 14) || *str == 32))
+		str++;
+	if (*str == '-')
+		neg = -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str <= '9' && *str >= '0' && *str)
+	{
+		res = res * 10 + (*str - 48);
+		str++;
+	}
+	return (res * neg);
+}

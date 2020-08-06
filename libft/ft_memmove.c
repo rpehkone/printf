@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:37:35 by rpehkone         ###   ########.fr       */
+/*   Created: 2019/10/20 10:46:58 by rpehkone          #+#    #+#             */
+/*   Updated: 2019/11/02 14:24:58 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t			i;
+	unsigned char	*d;
+	unsigned char	*s;
+	unsigned char	tmp[len];
 
-typedef struct	st_flag {
-	int		integer;
-	int		character;
-	int		floating;
-}				s_flag;
-
-int		ft_printf(char *str, ...);
-void	itoa_base(int value, int base);
-int		ft_put_float(float f);
-
-#endif
+	if (!src)
+		return (NULL);
+	i = -1;
+	s = (unsigned char*)src;
+	d = (unsigned char*)dst;
+	while (++i < len)
+		tmp[i] = s[i];
+	i = -1;
+	while (++i < len)
+		d[i] = tmp[i];
+	return (dst);
+}
