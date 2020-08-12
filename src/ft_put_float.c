@@ -6,31 +6,67 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:48:21 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/12 16:40:25 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
 char	*get_char(int value, int base);
 
 int		ft_put_float(float f)
 {
 	char *str;
+	int i = 0;
 
 	unsigned long long n;
 	n = f * 1000000;
-	str = get_char(f, 10);
-	int i = 0;
+	str = get_char(n, 10);
+	i = 0;
 	while (str[i])
 		i++;
 	i--;
 	while (str[i] == '0')
 		i--;
-	//int a = (int)2341.123;
-	//printf("%d\n", a);
 	str[i + 1] = '\0';
-	printf("%s", str);
+	i = 0;
+	while (n > 1000000)
+	{
+		n /= 10;
+		write(1 , &str[i], 1);
+		i++;
+	}
+	int printed = 0;
+	if (i == 0)
+	{
+		int n2 = n * 10;
+		write(1 , "0.", 2);
+		while (n2 < 1000000)
+		{
+			n2 *= 10;
+			write(1 , "0", 1);
+			printed++;
+		}
+	}
+	else
+		write(1 , ".", 1);
+	while (str[i])
+	{
+		write(1 , &str[i], 1);
+		i++;
+		printed++;
+	}
+	while (printed < 6)
+	{
+			write(1 , "0", 1);
+			printed++;
+	}
+	//printf("%s", str);
+	free(str);
+
+
+
 	return (1);
 }

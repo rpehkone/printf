@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/01/20 18:38:01 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/12 16:31:03 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -43,19 +43,23 @@ int		parse_flag(char *str, va_list ap)
 	else if (str[i] == 's')
 		ft_putstr(va_arg(ap, char *));
 	else if (str[i] == 'p')
-		ft_putchar(va_arg(ap, int));
+		uns_itoa_base(va_arg(ap, unsigned long long), 16);
 	else if (str[i] == 'd' || str[i] == 'i')
-		itoa_base(va_arg(ap, int), 10);
+		itoa_base(va_arg(ap, long long), 10);
 	else if (str[i] == 'o')
-		itoa_base(va_arg(ap, int), 8);//unnsigned octal
+		itoa_base(va_arg(ap, long long), 8);//unnsigned octal
 	else if (str[i] == 'u')
-		itoa_base(va_arg(ap, int), 10);//unnsigned decimal
+		itoa_base(va_arg(ap, long long), 10);//unnsigned decimal
 	else if (str[i] == 'x' || str[i] == 'X')
-		itoa_base(va_arg(ap, int), 16);//unisigned hexadecimal
+		itoa_base(va_arg(ap, long long), 16);//unisigned hexadecimal
 	else if (str[i] == 'f')
 		ft_put_float(va_arg(ap, double));
 	else if (str[i] == '%')
 		write(1, "%", 1);
+	//h on short
+	//hh short short eli char
+	//l = long
+	//ll long long
 	i++;
 	//if (str[i] != '.')
 	//	return (i);
