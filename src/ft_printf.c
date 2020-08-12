@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/12 18:13:00 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/12 18:57:39 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -29,6 +29,16 @@ void	ft_putstr(char const *s)
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+void	manage_long(char *str, va_list ap, int *i)
+{
+	(void)str;
+	(void)ap;
+		if (str[*i] == 'h')
+			i++;
+		//mita jos vaan h
+	
 }
 
 void	manage_short(char *str, va_list ap, int *i)
@@ -66,6 +76,8 @@ void	parse_flag(char *str, va_list ap, int *i)
 		write(1, "%", 1);
 	else if (str[*i] == 'h')
 		manage_short(str, ap, i);
+	else if (str[*i] == 'l')
+		manage_long(str, ap, i);
 	//h on short
 	//hh short short eli char
 	//l = long
