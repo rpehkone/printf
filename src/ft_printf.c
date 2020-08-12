@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/12 16:31:03 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/12 18:13:00 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -31,40 +31,48 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-int		parse_flag(char *str, va_list ap)
+void	manage_short(char *str, va_list ap, int *i)
+{
+	(void)str;
+	(void)ap;
+		if (str[*i] == 'h')
+			i++;
+		//mita jos vaan h
+	
+}
+
+void	parse_flag(char *str, va_list ap, int *i)
 {
 	//s_flag flags;
-	int i;
-
 	//tee että putstr ja itoa palauttaa stringin, jota voi muokata flägeillä
-	i = 0;
-	if (str[i] == 'c')
+	(*i)++;
+	if (str[*i] == 'c')
 		ft_putchar(va_arg(ap, int));
-	else if (str[i] == 's')
+	else if (str[*i] == 's')
 		ft_putstr(va_arg(ap, char *));
-	else if (str[i] == 'p')
+	else if (str[*i] == 'p')
 		uns_itoa_base(va_arg(ap, unsigned long long), 16);
-	else if (str[i] == 'd' || str[i] == 'i')
+	else if (str[*i] == 'd' || str[*i] == 'i')
 		itoa_base(va_arg(ap, long long), 10);
-	else if (str[i] == 'o')
+	else if (str[*i] == 'o')
 		itoa_base(va_arg(ap, long long), 8);//unnsigned octal
-	else if (str[i] == 'u')
+	else if (str[*i] == 'u')
 		itoa_base(va_arg(ap, long long), 10);//unnsigned decimal
-	else if (str[i] == 'x' || str[i] == 'X')
+	else if (str[*i] == 'x' || str[*i] == 'X')
 		itoa_base(va_arg(ap, long long), 16);//unisigned hexadecimal
-	else if (str[i] == 'f')
+	else if (str[*i] == 'f')
 		ft_put_float(va_arg(ap, double));
-	else if (str[i] == '%')
+	else if (str[*i] == '%')
 		write(1, "%", 1);
+	else if (str[*i] == 'h')
+		manage_short(str, ap, i);
 	//h on short
 	//hh short short eli char
 	//l = long
 	//ll long long
-	i++;
 	//if (str[i] != '.')
 	//	return (i);
 	//else
-	return (i);
 }
 
 int		ft_printf(char *str, ...)
@@ -77,7 +85,7 @@ int		ft_printf(char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%')
-			i += parse_flag(&str[i + 1], ap);
+			parse_flag(str, ap, &i);
 		else
 			write(1, &str[i], 1);
 		i++;
