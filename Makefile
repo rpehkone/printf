@@ -6,14 +6,14 @@
 #    By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/30 20:09:24 by rpehkone          #+#    #+#              #
-#    Updated: 2020/08/13 16:35:33 by rpehkone         ###   ########.fr        #
+#    Updated: 2020/08/13 18:52:09 by rpehkone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 LIB = libft/libft.a
 FOLDERS = libft/ src/
-FILES = ft_printf ft_itoa_base ft_put_float
+FILES = ft_printf integer float
 C_FILES = $(addsuffix .c, $(FILES))
 O_FILES = $(addsuffix .o, $(FILES))
 FLAGS = -Wall -Wextra -Werror -O3

@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 18:09:11 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:32:11 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 
 typedef struct	s_settings {
 	int			precision;
-	int			form : 1;
-	int			padding : 1;
-	int			negative : 1;
-	int			positive : 1;
-	int			space : 1;
+	int			form;
+	int			padding;
+	int			negative;
+	int			positive;
+	int			space;
+	int			is_short;
+	int			is_long;
 }				t_settings;
 
 int		ft_printf(char *str, ...);
