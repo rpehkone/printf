@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 17:07:11 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 18:11:55 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 19:22:36 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,6 @@ char	*uns_get_char(unsigned long long value, unsigned long long base)
 	return (res);
 }
 
-void	uns_itoa_base(unsigned long long value, unsigned long long base, t_settings *settings)
-{
-	(void)settings;
-	char *num;
-	char *to_free;
-
-	num = uns_get_char(value, base);
-	to_free = num;
-	if (base == 16)
-		write(1, "0x", 2);
-	while (*num)
-	{
-		write(1, &(*num), 1);
-		num++;
-	}
-	free(to_free);
-}
-
 char	*get_char(long long value, long long base)
 {
 	long long		val_cpy;
@@ -94,13 +76,20 @@ char	*get_char(long long value, long long base)
 	return (res);
 }
 
-void	itoa_base(long long value, long long base, t_settings *settings)
+void	print_integer(long long value, long long base, t_settings *settings, int is_signed)
 {
 	(void)settings;
 	char *num;
 	char *to_free;
 
-	num = get_char(value, base);
+	if (is_signed)
+		num = get_char(value, base);
+	else
+		num = uns_get_char(value, base);
+	if (base == 16 && !is_signed)
+		write(1, "0x", 2);
+	///else if (base == 16)
+	///	write(1, "0X", 2);
 	to_free = num;
 	while (*num)
 	{

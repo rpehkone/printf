@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 18:49:02 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 19:22:01 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ void	read_flag(char *str, va_list ap, int *i)
 	else if (str[*i] == 's')
 		ft_putstr(va_arg(ap, char *));
 	else if (str[*i] == 'p')
-		uns_itoa_base(va_arg(ap, unsigned long long), 16, &settings);
-	else if (str[*i] == 'd' || str[*i] == 'i' || str[*i] == 'u')
-		itoa_base(va_arg(ap, long long), 10, &settings);
+		print_integer(va_arg(ap, long long), 16, &settings, 0);
+	else if (str[*i] == 'u')
+		print_integer(va_arg(ap, long long), 10, &settings, 0);
+	else if (str[*i] == 'd' || str[*i] == 'i')
+		print_integer(va_arg(ap, long long), 10, &settings, 1);
 	else if (str[*i] == 'o')
-		itoa_base(va_arg(ap, long long), 8, &settings);//unnsigned octal
-	else if (str[*i] == 'x' || str[*i] == 'X')//0x tai 0X
-		itoa_base(va_arg(ap, long long), 16, &settings);//unisigned hexadecimal
+		print_integer(va_arg(ap, long long), 8, &settings, 1);//unnsigned octal
+	else if (str[*i] == 'x')
+		print_integer(va_arg(ap, long long), 16, &settings, 1);
+	else if (str[*i] == 'X')
+		print_integer(va_arg(ap, long long), 16, &settings, 2);
 	else if (str[*i] == 'f')
 		ft_put_float(va_arg(ap, double), &settings);
 	else if (str[*i] == '%')
