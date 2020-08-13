@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 21:04:11 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:38:55 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	modifiers(const char *str, int *i, t_settings *settings)
 
 void	precision(const char *str, int *i, t_settings *settings)
 {
+	if (str[*i] == '.' && ++(*i))
+	{
+		settings->precision = ft_atoi(&str[*i]);
+		while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
+			(*i)++;
+	}
 	if (str[*i] == 'h' && ++(*i))
 		settings->is_short = 1;
 	if (str[*i] == 'h' && ++(*i))
@@ -45,12 +51,6 @@ void	precision(const char *str, int *i, t_settings *settings)
 		settings->is_long = 1;
 	if ((str[*i] == 'l' || str[*i] == 'L') && ++(*i))
 		settings->is_long = 2;
-	if (str[*i] == '.' && ++(*i))
-	{
-		settings->precision = ft_atoi(&str[*i]);
-		while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
-			(*i)++;
-	}
 }
 
 void	read_flag(const char *str, va_list ap, int *i)
