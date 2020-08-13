@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 16:38:58 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 16:59:39 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,15 @@ void	parse_flag(char *str, va_list ap, int *i)
 	int precision;
 
 	precision = 0;
-	if (str[(*i)++] == '.')
+	if (str[++(*i)] == '.')
 		set_precision(&precision, str, i);
-	else if (str[*i] == 'c')
+	else if (str[*i] == 'c')//if tahan vai d kohtaan
 		ft_putchar(va_arg(ap, int));
 	else if (str[*i] == 's')
 		ft_putstr(va_arg(ap, char *));
 	else if (str[*i] == 'p')
 		uns_itoa_base(va_arg(ap, unsigned long long), 16, precision);
-	else if (str[*i] == 'd' || str[*i] == 'i' || str[*i] == 'u')
+	if (str[*i] == 'd' || str[*i] == 'i' || str[*i] == 'u')
 		itoa_base(va_arg(ap, long long), 10, precision);
 	else if (str[*i] == 'o')
 		itoa_base(va_arg(ap, long long), 8, precision);//unnsigned octal
