@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 17:07:11 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 21:03:45 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:59:59 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*itoa_base(long long value, long long base)
 	return (res);
 }
 
-void	print_integer(long long value, long long base, t_settings *settings, int is_signed)
+void	print_integer(long long value, long long base, int is_signed, t_settings *settings)
 {
 	char *num;
 	char *to_free;

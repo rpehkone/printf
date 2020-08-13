@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 20:59:09 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:59:43 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_settings {
 int				ft_printf(const char *str, ...);
 char			*itoa_base(long long value, long long base);
 void			print_integer(long long value, long long base,
-						t_settings *settings, int is_signed);
-void			print_float(float f, t_settings *settings);
+						int is_integer, t_settings *settings);
+void			print_float(long double f, t_settings *settings);
 
 #endif

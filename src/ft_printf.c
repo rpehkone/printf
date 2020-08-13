@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 21:38:55 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 22:00:48 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,19 @@ void	read_flag(const char *str, va_list ap, int *i)
 	else if (str[*i] == 's')
 		ft_putstr(va_arg(ap, char *));
 	else if (str[*i] == 'p')
-		print_integer(va_arg(ap, long long), 16, &settings, 0);
+		print_integer(va_arg(ap, long long), 16, 0, &settings);
 	else if (str[*i] == 'u')
-		print_integer(va_arg(ap, long long), 10, &settings, 0);
+		print_integer(va_arg(ap, long long), 10, 0, &settings);
 	else if (str[*i] == 'd' || str[*i] == 'i')
-		print_integer(va_arg(ap, long long), 10, &settings, 1);
+		print_integer(va_arg(ap, long long), 10, 1, &settings);
 	else if (str[*i] == 'o')
-		print_integer(va_arg(ap, long long), 8, &settings, 1);
+		print_integer(va_arg(ap, long long), 8, 1, &settings);
 	else if (str[*i] == 'x')
-		print_integer(va_arg(ap, long long), 16, &settings, 1);
+		print_integer(va_arg(ap, long long), 16, 1, &settings);
 	else if (str[*i] == 'X')
-		print_integer(va_arg(ap, long long), 16, &settings, 2);
+		print_integer(va_arg(ap, long long), 16, 2, &settings);
 	else if (str[*i] == 'f')
-		print_float(va_arg(ap, double), &settings);
+		print_float(va_arg(ap, long double), &settings);
 	else if (str[*i] == '%')
 		write(1, "%", 1);
 }
