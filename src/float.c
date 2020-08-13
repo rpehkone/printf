@@ -6,17 +6,15 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 18:08:50 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 19:43:54 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "ft_printf.h"
 
 char	*get_char(int value, int base);
 
-int		ft_put_float(float f, t_settings *settings)
+int		print_float(float f, t_settings *settings)
 {
 	char *str;
 	int i = 0;

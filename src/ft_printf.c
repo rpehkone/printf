@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 19:40:27 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 19:47:49 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	read_flag(char *str, va_list ap, int *i)
 	else if (str[*i] == 'X')
 		print_integer(va_arg(ap, long long), 16, &settings, 2);
 	else if (str[*i] == 'f')
-		ft_put_float(va_arg(ap, double), &settings);
+		print_float(va_arg(ap, double), &settings);
 	else if (str[*i] == '%')
 		write(1, "%", 1);
 }
