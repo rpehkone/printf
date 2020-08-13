@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 17:00:25 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:08:50 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	*get_char(int value, int base);
 
-int		ft_put_float(float f, int precision)
+int		ft_put_float(float f, t_settings *settings)
 {
 	char *str;
 	int i = 0;
@@ -52,16 +52,18 @@ int		ft_put_float(float f, int precision)
 	}
 	else
 		write(1 , ".", 1);
+	if (settings->precision == 0)
+		settings->precision = 6;//mita oikee printf("%.0f") tekee
 	//(void)precision;
 	//while (str[i])
-	while (str[i] && i < precision)
+	while (str[i] && i < settings->precision)
 	{
 		write(1 , &str[i], 1);
 		i++;
 		printed++;
 	}
 	//while (printed < 6)
-	while (printed < precision)
+	while (printed < settings->precision)
 	{
 			write(1 , "0", 1);
 			printed++;

@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 16:59:39 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:11:21 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 */
+
 void	manage_long(char *str, va_list ap, int *i, int precision)
 {
 	(void)precision;
@@ -78,33 +79,61 @@ void	set_precision(int *precision, char *str, int *i)
 	}
 }
 
-void	parse_flag(char *str, va_list ap, int *i)
+void	make_settings(t_settings *settings, char *str, int *i)
 {
-	int precision;
+	settings->precision = 0;
+	settings->form = 0;
+	settings->padding = 0;
+	settings->negative = 0;
+	settings->positive = 0;
+	settings->space = 0;
+	if (str[*i] == '.')
+	{
+		(*i)++;
+		settings->precision = ft_atoi(&str[*i]);	
+		while (str[*i] && str[*i] >= '0' && str[*i] <= '9')
+			(*i)++;
+	}
+//		set_precision(, str, i);
+	if (str[*i] == '#')
+		settings->form = 1;
+	if (str[*i] == '0')
+		settings->padding = 1;//toinen pois
+	if (str[*i] == '-')
+		settings->negative = 1;
+	if (str[*i] == '+')
+		settings->positive = 1;
+	if (str[*i] == ' ')
+		settings->space = 1;
+}
 
-	precision = 0;
-	if (str[++(*i)] == '.')
-		set_precision(&precision, str, i);
-	else if (str[*i] == 'c')//if tahan vai d kohtaan
+void	read_flag(char *str, va_list ap, int *i)
+{
+	t_settings settings;
+
+	make_settings(&settings, str, i);
+	if (str[*i] == 'c')
 		ft_putchar(va_arg(ap, int));
 	else if (str[*i] == 's')
 		ft_putstr(va_arg(ap, char *));
 	else if (str[*i] == 'p')
-		uns_itoa_base(va_arg(ap, unsigned long long), 16, precision);
-	if (str[*i] == 'd' || str[*i] == 'i' || str[*i] == 'u')
-		itoa_base(va_arg(ap, long long), 10, precision);
+		uns_itoa_base(va_arg(ap, unsigned long long), 16, &settings);
+	else if (str[*i] == 'd' || str[*i] == 'i' || str[*i] == 'u')
+		itoa_base(va_arg(ap, long long), 10, &settings);
 	else if (str[*i] == 'o')
-		itoa_base(va_arg(ap, long long), 8, precision);//unnsigned octal
+		itoa_base(va_arg(ap, long long), 8, &settings);//unnsigned octal
 	else if (str[*i] == 'x' || str[*i] == 'X')
-		itoa_base(va_arg(ap, long long), 16, precision);//unisigned hexadecimal
+		itoa_base(va_arg(ap, long long), 16, &settings);//unisigned hexadecimal
 	else if (str[*i] == 'f')
-		ft_put_float(va_arg(ap, double), precision);
+		ft_put_float(va_arg(ap, double), &settings);
 	else if (str[*i] == '%')
 		write(1, "%", 1);
+	/*
 	else if (str[*i] == 'h')
-		manage_short(str, ap, i, precision);
+		manage_short(str, ap, i, settings);//bitshift tassa
 	else if (str[*i] == 'l')
-		manage_long(str, ap, i, precision);
+		manage_long(str, ap, i, settings);
+		*/
 }
 
 int		ft_printf(char *str, ...)
@@ -116,8 +145,11 @@ int		ft_printf(char *str, ...)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
-			parse_flag(str, ap, &i);
+		if (str[i] == '%' && str[i + 1])
+		{
+			i++;
+			read_flag(str, ap, &i);
+		}
 		else
 			write(1, &str[i], 1);
 		i++;

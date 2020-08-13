@@ -6,12 +6,11 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 17:07:11 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 16:01:01 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:11:55 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 char	*uns_get_char(unsigned long long value, unsigned long long base)
 {
@@ -45,9 +44,9 @@ char	*uns_get_char(unsigned long long value, unsigned long long base)
 	return (res);
 }
 
-void	uns_itoa_base(unsigned long long value, unsigned long long base, int precision)
+void	uns_itoa_base(unsigned long long value, unsigned long long base, t_settings *settings)
 {
-	(void)precision;
+	(void)settings;
 	char *num;
 	char *to_free;
 
@@ -95,9 +94,9 @@ char	*get_char(long long value, long long base)
 	return (res);
 }
 
-void	itoa_base(long long value, long long base, int precision)
+void	itoa_base(long long value, long long base, t_settings *settings)
 {
-	(void)precision;
+	(void)settings;
 	char *num;
 	char *to_free;
 
