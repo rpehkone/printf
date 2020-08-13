@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 19:43:54 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:14:45 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_char(int value, int base);
 
-int		print_float(float f, t_settings *settings)
+void	print_float(float f, t_settings *settings)
 {
 	char *str;
 	int i = 0;
@@ -68,8 +68,4 @@ int		print_float(float f, t_settings *settings)
 	}
 	//printf("%s", str);
 	free(str);
-
-
-
-	return (1);
 }
