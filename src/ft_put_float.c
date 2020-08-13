@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/12 16:40:25 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 16:00:41 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 char	*get_char(int value, int base);
 
-int		ft_put_float(float f)
+int		ft_put_float(float f, int precision)
 {
+	(void)precision;
 	char *str;
 	int i = 0;
 
