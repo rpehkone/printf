@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:04:54 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 20:42:08 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:59:09 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@
 # define GREEN " \033[1;32m"
 
 typedef struct	s_settings {
-	int			precision;
-	int			form;
-	int			padding;
+	int			hash;
+	int			zero;
 	int			negative;
 	int			positive;
 	int			space;
 	int			is_short;
 	int			is_long;
+	int			precision;
 }				t_settings;
 
 int				ft_printf(const char *str, ...);
+char			*itoa_base(long long value, long long base);
 void			print_integer(long long value, long long base,
 						t_settings *settings, int is_signed);
 void			print_float(float f, t_settings *settings);

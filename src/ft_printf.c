@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 20:47:14 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:04:11 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	modifiers(const char *str, int *i, t_settings *settings)
 	{
 		did_change = 0;
 		if (str[*i] == '#' && (did_change++ + 1))
-			settings->form = 1;
+			settings->hash = 1;
 		if (str[*i] == '0' && (did_change++ + 1))
-			settings->padding = 1;
+			settings->zero = 1;
 		if (str[*i] == '-' && (did_change++ + 1))
 			settings->negative = 1;
 		if (str[*i] == '+' && (did_change++ + 1))

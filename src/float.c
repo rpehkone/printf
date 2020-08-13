@@ -6,13 +6,11 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 20:14:45 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:53:14 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*get_char(int value, int base);
 
 void	print_float(float f, t_settings *settings)
 {
@@ -21,7 +19,7 @@ void	print_float(float f, t_settings *settings)
 
 	unsigned long long n;
 	n = f * 1000000;
-	str = get_char(n, 10);
+	str = itoa_base(n, 10);
 	i = 0;
 	while (str[i])
 		i++;
