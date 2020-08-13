@@ -6,13 +6,13 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 20:10:04 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:47:14 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	modifiers(t_settings *settings, char *str, int *i)
+void	modifiers(const char *str, int *i, t_settings *settings)
 {
 	int	did_change;
 
@@ -35,7 +35,7 @@ void	modifiers(t_settings *settings, char *str, int *i)
 	}
 }
 
-void	precision(t_settings *settings, char *str, int *i)
+void	precision(const char *str, int *i, t_settings *settings)
 {
 	if (str[*i] == 'h' && ++(*i))
 		settings->is_short = 1;
@@ -53,13 +53,13 @@ void	precision(t_settings *settings, char *str, int *i)
 	}
 }
 
-void	read_flag(char *str, va_list ap, int *i)
+void	read_flag(const char *str, va_list ap, int *i)
 {
 	t_settings settings;
 
 	ft_memset((void*)&settings, 0, 8 * sizeof(int));
-	modifiers(&settings, str, i);
-	precision(&settings, str, i);
+	modifiers(str, i, &settings);
+	precision(str, i, &settings);
 	if (str[*i] == 'c')
 		ft_putchar(va_arg(ap, int));
 	else if (str[*i] == 's')
@@ -82,22 +82,22 @@ void	read_flag(char *str, va_list ap, int *i)
 		write(1, "%", 1);
 }
 
-int		ft_printf(char *str, ...)
+int		ft_printf(const char *format, ...)
 {
 	int		i;
 	va_list	ap;
 
-	va_start(ap, str);
+	va_start(ap, format);
 	i = 0;
-	while (str[i])
+	while (format[i])
 	{
-		if (str[i] == '%' && str[i + 1])
+		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
-			read_flag(str, ap, &i);
+			read_flag(format, ap, &i);
 		}
 		else
-			write(1, &str[i], 1);
+			write(1, &format[i], 1);
 		i++;
 	}
 	va_end(ap);
