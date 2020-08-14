@@ -6,7 +6,7 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:19:05 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 22:00:48 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/14 13:09:06 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	read_flag(const char *str, va_list ap, int *i)
 {
 	t_settings settings;
 
-	ft_memset((void*)&settings, 0, 8 * sizeof(int));
+	ft_memset((void*)&settings, 0, sizeof(t_settings));
 	modifiers(str, i, &settings);
 	precision(str, i, &settings);
 	if (str[*i] == 'c')

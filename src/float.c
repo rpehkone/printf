@@ -6,67 +6,55 @@
 /*   By: rpehkone <rpehkone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 17:57:13 by rpehkone          #+#    #+#             */
-/*   Updated: 2020/08/13 22:04:18 by rpehkone         ###   ########.fr       */
+/*   Updated: 2020/08/14 13:08:21 by rpehkone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_float(long double f, t_settings *settings)
+#include <stdio.h>
+void	print_fraction(long long f)
 {
-	char *str;
-	int i = 0;
+	char	*str;
+	int		i;
 
-	long long n;
-
-	long long test = 100000000000000000;
-	n = f * test;
-	str = itoa_base(n, 10);
+	printf("\nf = %llu\n", f);
+	f = f << 11;
+	//f *= 1000000;
+	printf("\nf = %llu\n", f);
+	//f = f >> 11;
+	printf("\nf = %llu\n", f);
+	str = itoa_base(f, 10);
 	i = 0;
 	while (str[i])
-		i++;
-	i--;
-	while (str[i] == '0')
-		i--;
-	str[i + 1] = '\0';
-	i = 0;
-	while (n > test)
-	{
-		n /= 10;
-		write(1 , &str[i], 1);
-		i++;
-	}
-	int printed = 0;
-	//exit(0);
-	if (i == 0)
-	{
-		int n2 = n * 10;
-		write(1 , "0.", 2);
-		while (n2 < test)
-		{
-			n2 *= 10;
-			write(1 , "0", 1);
-			printed++;
-		}
-	}
-	else
-		write(1 , ".", 1);
-	if (settings->precision == 0)
-		settings->precision = 6;//mita oikee printf("%.0f") tekee
-	//(void)precision;
-	//while (str[i])
-	while (str[i] && i < settings->precision)
 	{
 		write(1 , &str[i], 1);
 		i++;
-		printed++;
 	}
-	//while (printed < 6)
-	while (printed < settings->precision)
-	{
-			write(1 , "0", 1);
-			printed++;
-	}
-	//printf("%s", str);
 	free(str);
+}
+
+void	print_integer_part(int f)
+{
+	char	*str;
+	int		i;
+
+	str = itoa_base(f, 10);
+	i = 0;
+	while (str[i])
+	{
+		write(1 , &str[i], 1);
+		i++;
+	}
+	free(str);
+}
+
+void	print_float(long double f, t_settings *settings)
+{
+	print_integer_part(f);
+	if (f < 0)
+		f *= -1;
+	write(1 , ".", 1);
+	print_fraction(f);
+	(void)settings;
 }
