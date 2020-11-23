@@ -13,23 +13,81 @@
 #include "ft_printf.h"
 
 #include <stdio.h>
-void	print_fraction(long long f)
+
+
+
+
+
+
+
+int	ft_ulonglen(unsigned long n)
 {
-	printf("\nf = %llu\n", f);
-	f = f << 11;
-	//f *= 1000000;
-	printf("\nf = %llu\n", f);
-	//f = f >> 11;
-	printf("\nf = %llu\n", f);
-	
+	int i;
+
+	i = 0;
+	while (n || !i)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }
 
+//*
+int	power_10(int power)
+{
+	int i;
+
+	i = 10;
+	while (power-- > 1)
+		i *= 10;
+	return (i);
+}
+
+void	handle_rounding(int *n, long double *d, int precision)
+{
+	int i;
+	int len;
+
+	i = 0;
+	while (i++ < precision)
+		*d *= 10;
+	if (((unsigned long)(*d * 10) % 10) > 4)
+	{
+		len = ft_ulonglen((unsigned long)*d);
+		(*d)++;
+		if ((ft_ulonglen((unsigned long)*d) != len &&
+			(unsigned long)*d % power_10(precision) == 0) || !precision)
+		{
+			//(*n)++;
+			*d = 0;
+		}
+	}
+(void)n;
+}
+
+//*/
 void	print_float(long double f, t_settings *settings)
 {
-	itoa_base((int)f, 10);
+	int	n;
+
+	int precision = 6;
 	if (f < 0)
+	{
+		write(1, "-", 1);
 		f *= -1;
-	write(1 , ".", 1);
-	print_fraction(f);
+	}
+	n = (int)f;
+	f -= (unsigned long)f;
+	handle_rounding(&n, &f, precision);
+	unsigned_itoa_base(n, 10);
+	if (precision > 0)
+	{
+		write(1, ".", 1);
+		precision -= ft_ulonglen((unsigned long)f);
+		while (precision-- > 0)
+			write(1, "0", 1);
+		unsigned_itoa_base((unsigned long)f, 10);
+	}
 	(void)settings;
 }

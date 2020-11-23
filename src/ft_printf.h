@@ -34,6 +34,7 @@ typedef struct	s_settings {
 
 int				ft_printf(const char *str, ...);
 void			itoa_base(long long value, long long base);
+void			unsigned_itoa_base(unsigned long long value, unsigned long long base);
 void			print_integer(long long value, long long base,
 						int is_integer, t_settings *settings);
 void			print_float(long double f, t_settings *settings);
